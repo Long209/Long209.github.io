@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>极客大挑战2019-EasySQL-1</title>
+    <link href="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/"/>
+    <url>/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="极客大挑战-2019-EasySQL-1"><a href="#极客大挑战-2019-EasySQL-1" class="headerlink" title="极客大挑战-2019-EasySQL-1"></a>极客大挑战-2019-EasySQL-1</h1><p>打开靶场</p><img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682298792746.png" alt="1682298792746" style="zoom:80%;"><p>根据靶场名字提示，可以知道这是一个SQL注入的靶场，登录框尝试万能密码推测</p><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span><span class="hljs-keyword">and</span> <span class="hljs-number">1</span>=<span class="hljs-number">1</span><br><span class="hljs-number">1</span><span class="hljs-comment">&#x27; and &#x27;1&#x27;=&#x27;1</span><br><span class="hljs-symbol">1 </span><span class="hljs-keyword">or</span> <span class="hljs-number">1</span>=<span class="hljs-number">1</span> <br><span class="hljs-number">1</span><span class="hljs-comment">&#x27; or &#x27;1&#x27;=&#x27;1</span><br><br></code></pre></td></tr></table></figure><p>通过尝试，and不行，判断此处的SQL语句应为</p><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">tables</span> <span class="hljs-keyword">WHERE</span> username=‘<span class="hljs-number">1</span>’ <span class="hljs-keyword">and</span> ‘<span class="hljs-number">1</span>’=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">password</span>=<span class="hljs-string">&#x27;输入值&#x27;</span> <br><br></code></pre></td></tr></table></figure><p>最终payload为：用户名：test密码：1’ or ‘1’&#x3D;’1或者1‘ or ’1</p><img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682321360291.png" alt="1682321360291" style="zoom:80%;"><p>点击登录，出现flag</p><img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682321394171.png" alt="1682321394171" style="zoom:80%;">]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>CTF-WEB</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>极客大挑战2019-Havefun-1</title>
+    <link href="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun-1/"/>
+    <url>/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="极客大挑战-2019-Havefun-1"><a href="#极客大挑战-2019-Havefun-1" class="headerlink" title="[极客大挑战 2019]Havefun-1"></a>[极客大挑战 2019]Havefun-1</h1><p>打开靶场</p><img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun-1/1682322305950.png" alt="1682322305950" style="zoom: 67%;"><p>发现没有任何功能点，F12大法</p><img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun-1/1682322364042.png" alt="1682322364042" style="zoom: 80%;"><p>这部分代码表示有一个cat变量，是通过GET请求方法传参，如果cat的值为dog则会输出Syc</p><p>尝试构造请求</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">payload：http:<span class="hljs-regexp">//</span>xxx.xx?cat=dog<br></code></pre></td></tr></table></figure><p>flag出现</p><img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun-1/1682322550360.png" alt="1682322550360" style="zoom:67%;">]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>CTF-WEB</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Apache-log4j2漏洞</title>
     <link href="/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/"/>
     <url>/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/</url>

