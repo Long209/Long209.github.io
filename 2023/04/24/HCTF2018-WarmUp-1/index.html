@@ -15,7 +15,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="long314">
   <meta name="keywords" content="">
   
     <meta name="description" content="HCTF 2018WarmUp-1打开靶场，看到一个滑稽表情   F12查看，发现存在source.php文件   找到源代码，对这段php进行分析   首先分析最后一段的三个条件 1234567891011&#x2F;&#x2F;这三个条件都为true才能进入include函数，文件包含处flag文件，前两个条件为判断是否为空和字符串，主要看第三个    if (! empty($_REQUEST[&amp;#x27;fi">
@@ -32,11 +32,13 @@
 <meta property="og:image" content="http://example.com/2023/04/24/HCTF2018-WarmUp-1/1682314769365.png">
 <meta property="article:published_time" content="2023-04-24T06:48:15.000Z">
 <meta property="article:modified_time" content="2023-04-24T06:56:32.188Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="long314">
 <meta property="article:tag" content="CTF-WEB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2023/04/24/HCTF2018-WarmUp-1/1682314816823.png">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>HCTF2018-WarmUp-1 - 某小网站</title>
@@ -234,6 +236,14 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
   </div>
 
 
@@ -350,7 +360,7 @@ if (! isset($page) || !is_string($page)) &#123;
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>long314</div>
         </div>
       
       
@@ -645,6 +655,8 @@ if (! isset($page) || !is_string($page)) &#123;
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

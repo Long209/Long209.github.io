@@ -15,7 +15,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="long314">
   <meta name="keywords" content="">
   
     <meta name="description" content="ThinkPHP版本漏洞5.x远程命令执行影响版本：5.x  漏洞原理：控制器过滤不严，结合直接返回类名的代码操作，导致可以用命名空间的方式来调用任意类的任意方 法，控制器过滤不严导致在网站没有开启强制路由的情况下（即默认情况下）可以执行任意方法，从而导致远程命 令执行漏洞。   payload:   123http:&#x2F;&#x2F;地址&#x2F;?s&#x3D;index&#x2F;\think\app&#x2F;invokefunction&amp;">
@@ -27,10 +27,12 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-24T07:04:19.000Z">
 <meta property="article:modified_time" content="2023-04-24T07:04:54.625Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="long314">
 <meta property="article:tag" content="漏洞复现">
 <meta name="twitter:card" content="summary_large_image">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>ThinkPHP版本漏洞 - 某小网站</title>
@@ -228,6 +230,14 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
   </div>
 
 
@@ -322,7 +332,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>long314</div>
         </div>
       
       
@@ -623,6 +633,8 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
